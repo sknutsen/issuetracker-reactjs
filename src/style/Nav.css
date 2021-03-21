@@ -1,0 +1,16 @@
+header {
+    text-align: center;
+}
+
+header a {
+    margin: 20px;
+}
+
+a {
+  color: #61dafb;
+  text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
