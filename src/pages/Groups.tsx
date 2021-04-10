@@ -1,27 +1,15 @@
 import React, { useState } from 'react'
 import { Group } from '../entities/Group';
-import { apiUrl } from "../constants";
-import { getAccessToken } from '../accessToken';
+import { GroupsTable } from '../components/Groups/GroupsTable';
+import { GetGroups } from '../handlers/groups';
+import { GroupsForm } from '../components/Groups/GroupsForm';
 
-interface GroupsProps {
-
-}
-
-export const Groups: React.FC<GroupsProps> = () => {
+export const Groups: React.FC = () => {
     const grparr: Group[] = [];
     const [groups, setGroups] = useState(grparr);
 
     async function updateGroups() {
-        const response = await fetch(`${apiUrl}/groups`, {
-            method: 'GET', 
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8', 
-                'authorization': `bearer ${getAccessToken()}`
-            }, 
-            mode: "cors", 
-            credentials: "include"
-        });
-        const data = await response.json();
+        const data = await GetGroups();
 
         setGroups(data);
     }
@@ -29,24 +17,8 @@ export const Groups: React.FC<GroupsProps> = () => {
     return (
         <div>
             <button onClick={async () => await updateGroups()}>Update table</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Row</th>
-                        <th>Id</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {groups.map((g, i) => 
-                        <tr>
-                            <td>{i}</td>
-                            <td>{g.Id}</td>
-                            <td>{g.Name}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            <GroupsTable groups={groups} />
+            <GroupsForm />
         </div>
     );
 }
