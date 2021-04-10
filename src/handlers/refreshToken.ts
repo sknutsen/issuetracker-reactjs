@@ -1,4 +1,4 @@
-import { getAccessToken } from "../accessToken";
+import { getAccessToken, setAccessToken } from "../accessToken";
 import { authUrl } from "../constants";
 
 export const refreshToken = async () => {
@@ -11,7 +11,7 @@ export const refreshToken = async () => {
         mode: "cors", 
         credentials: "include"
     });
-    const data = await response.json();
-    console.log(data);
-    return;
+    const { accessToken } = await response.json();
+    setAccessToken(accessToken);
+    return response;
 }
