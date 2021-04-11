@@ -1,7 +1,10 @@
+import { Group } from "./Group";
+import { User } from "./User";
+
 export class Issue {
     public Id: number;
-    public User: any;
-    public Group: any;
+    public User: User;
+    public Group: Group;
     public Title: string;
     public Description: string;
     public Severity: string;

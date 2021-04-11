@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Issue } from '../../entities/Issue';
 import { PostIssue } from '../../handlers/issues';
 
 interface IssuesFormProps {
-    updateIssues: () => Promise<void>;
+    updateIssues: () => void;
 }
 
 export const IssuesForm: React.FC<IssuesFormProps> = ({updateIssues}) => {
@@ -14,17 +13,9 @@ export const IssuesForm: React.FC<IssuesFormProps> = ({updateIssues}) => {
     return (
         <form onSubmit={async (e) => {
             e.preventDefault();
-            const issue: Issue = {
-                Id: 0,
-                User: 1,
-                Group: 1,
-                Title: title,
-                Description: description,
-                Severity: severity
-            };
             
-            await PostIssue(issue);
-            await updateIssues();
+            await PostIssue(title, description, severity);
+            updateIssues();
 
             setTitle("");
             setDescription("");

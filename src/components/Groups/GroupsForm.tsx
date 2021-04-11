@@ -3,7 +3,7 @@ import { Group } from '../../entities/Group';
 import { PostGroup } from '../../handlers/groups';
 
 interface GroupsFormProps {
-    updateGroups: () => Promise<void>;
+    updateGroups: () => void;
 }
 
 export const GroupsForm: React.FC<GroupsFormProps> = ({updateGroups}) => {
@@ -14,11 +14,13 @@ export const GroupsForm: React.FC<GroupsFormProps> = ({updateGroups}) => {
             e.preventDefault();
             const group: Group = {
                 Id: 0,
-                Name: name
+                Name: name,
+                Issues: [],
+                Users: []
             };
 
             await PostGroup(group);
-            await updateGroups();
+            updateGroups();
 
             setName("");
         }}>

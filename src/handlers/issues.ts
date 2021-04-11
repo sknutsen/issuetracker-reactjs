@@ -13,7 +13,9 @@ export const GetIssues = async () => {
         credentials: "include"
     });
 
-    const data = await response.json();
+    const data: Issue[] = await response.json();
+
+    console.log(data);
 
     return data;
 };
@@ -51,7 +53,7 @@ export const PutIssue = async (issue: Issue) => {
     return data;
 };
 
-export const PostIssue = async (issue: Issue) => {
+export const PostIssue = async (title: string, description: string, severity: string) => {
     const response = await fetch(`${apiUrl}/issues`, {
         method: 'POST', 
         headers: {
@@ -60,7 +62,11 @@ export const PostIssue = async (issue: Issue) => {
         }, 
         mode: "cors", 
         credentials: "include",
-        body: JSON.stringify(issue)
+        body: JSON.stringify({
+            "Title": title,
+            "Description": description,
+            "Severity": severity
+        })
     });
 
     const data = await response.json();
