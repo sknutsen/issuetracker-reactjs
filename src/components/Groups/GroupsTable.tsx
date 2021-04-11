@@ -17,7 +17,7 @@ export const GroupsTable: React.FC<GroupsTableProps> = ({groups}) => {
             </thead>
             <tbody>
                 {groups.map((g, i) => 
-                    <tr>
+                    <tr key={g.Id}>
                         <td>{i}</td>
                         <td>{g.Id}</td>
                         <td>{g.Name}</td>

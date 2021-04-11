@@ -3,10 +3,10 @@ import { login } from '../handlers/login';
 import "../style/Page-style.css";
 
 interface LoginProps {
-
+    logIn: (bool: boolean) => void;
 }
 
-export const Login: React.FC<LoginProps> = () => {
+export const Login: React.FC<LoginProps> = ({logIn}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -14,6 +14,7 @@ export const Login: React.FC<LoginProps> = () => {
         <form onSubmit={async (e) => {
             e.preventDefault();
             await login(email, password);
+            logIn(true);
         }}>
             <div>
                 <input type="text" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)} />

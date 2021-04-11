@@ -14,11 +14,12 @@ export const Groups: React.FC = () => {
         setGroups(data);
     }
 
+    //updateGroups().then();
+
     return (
         <div>
-            <button onClick={async () => await updateGroups()}>Update table</button>
             <GroupsTable groups={groups} />
-            <GroupsForm />
+            <GroupsForm updateGroups={updateGroups} />
         </div>
     );
 }

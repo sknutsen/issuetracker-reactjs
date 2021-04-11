@@ -3,10 +3,10 @@ import { Group } from '../../entities/Group';
 import { PostGroup } from '../../handlers/groups';
 
 interface GroupsFormProps {
-
+    updateGroups: () => Promise<void>;
 }
 
-export const GroupsForm: React.FC<GroupsFormProps> = () => {
+export const GroupsForm: React.FC<GroupsFormProps> = ({updateGroups}) => {
     const [name, setName] = useState("");
 
     return (
@@ -16,8 +16,11 @@ export const GroupsForm: React.FC<GroupsFormProps> = () => {
                 Id: 0,
                 Name: name
             };
-            console.log(group);
+
             await PostGroup(group);
+            await updateGroups();
+
+            setName("");
         }}>
             <input type={"text"} placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
             <br />

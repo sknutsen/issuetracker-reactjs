@@ -3,9 +3,10 @@ import { Issue } from '../../entities/Issue';
 
 interface IssuesTableProps {
     issues: Issue[];
+    selectIssue: (issue: any) => void;
 }
 
-export const IssuesTable: React.FC<IssuesTableProps> = ({issues}) => {
+export const IssuesTable: React.FC<IssuesTableProps> = ({issues, selectIssue}) => {
     return (
         <table width={"100%"}>
             <thead>
@@ -21,7 +22,7 @@ export const IssuesTable: React.FC<IssuesTableProps> = ({issues}) => {
             </thead>
             <tbody>
                 {issues.map((i, idx) => 
-                    <tr>
+                    <tr key={i.Id} onClick={() => selectIssue(i)}>
                         <td>{idx}</td>
                         <td>{i.Id}</td>
                         <td>{i.Title}</td>

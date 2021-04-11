@@ -52,7 +52,6 @@ export const PutIssue = async (issue: Issue) => {
 };
 
 export const PostIssue = async (issue: Issue) => {
-    console.log(issue);
     const response = await fetch(`${apiUrl}/issues`, {
         method: 'POST', 
         headers: {

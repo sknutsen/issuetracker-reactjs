@@ -3,10 +3,10 @@ import { Issue } from '../../entities/Issue';
 import { PostIssue } from '../../handlers/issues';
 
 interface IssuesFormProps {
-
+    updateIssues: () => Promise<void>;
 }
 
-export const IssuesForm: React.FC<IssuesFormProps> = () => {
+export const IssuesForm: React.FC<IssuesFormProps> = ({updateIssues}) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [severity, setSeverity] = useState("Low");
@@ -22,7 +22,13 @@ export const IssuesForm: React.FC<IssuesFormProps> = () => {
                 Description: description,
                 Severity: severity
             };
+            
             await PostIssue(issue);
+            await updateIssues();
+
+            setTitle("");
+            setDescription("");
+            setSeverity("");
         }}>
             <input type={"text"} placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
             <br />
