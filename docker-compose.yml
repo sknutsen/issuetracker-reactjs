@@ -1,0 +1,38 @@
+services:
+    login:
+        ports:
+            - "8081:8081"
+        networks:
+            - issuetracker
+        env_file:
+            - .env
+        environment:
+            NODE_ENV: "production"
+
+    backend:
+        ports:
+            - "8080:8080"
+        networks:
+            - issuetracker
+        env_file:
+            - .env
+        environment:
+            NODE_ENV: "production"
+        depends_on:
+            - login
+
+    frontend:
+        build:
+            context: .
+        ports:
+            - "3000:3000"
+        networks:
+            - issuetracker
+        environment:
+            NODE_ENV: "production"
+        depends_on:
+            - login
+            - backend
+
+networks:
+    issuetracker:
