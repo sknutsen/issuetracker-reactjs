@@ -8,13 +8,17 @@ export class Issue {
     public Title: string;
     public Description: string;
     public Severity: string;
+    public PostedAt: Date;
+    public UpdatedAt: Date;
 
-    constructor(id: number, user: any, group: any, title: string, description: string, severity: string) {
+    constructor(id: number, user: any, group: any, title: string, description: string, severity: string, postedAt: Date, updatedAt: Date) {
         this.Id = id;
         this.User = user;
         this.Group = group;
         this.Title = title;
         this.Description = description;
         this.Severity = severity;
+        this.PostedAt = postedAt;
+        this.UpdatedAt = updatedAt;
     }
 }

@@ -1,20 +1,28 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router';
 import { login } from '../handlers/login';
 import "../style/Page-style.css";
 
 interface LoginProps {
-    logIn: (bool: boolean) => void;
+    loggedIn: boolean;
+    setLoggedIn: (bool: boolean) => void;
 }
 
-export const Login: React.FC<LoginProps> = ({logIn}) => {
+export const Login: React.FC<LoginProps> = ({loggedIn, setLoggedIn}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    if (loggedIn) {
+        return (
+            <Redirect to={"/logout"} />
+        );
+    }
 
     return (
         <form onSubmit={async (e) => {
             e.preventDefault();
             await login(email, password);
-            logIn(true);
+            setLoggedIn(true);
         }}>
             <div>
                 <input type="text" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)} />

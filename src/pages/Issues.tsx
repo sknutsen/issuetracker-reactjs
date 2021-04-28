@@ -3,23 +3,21 @@ import { IssuesForm } from '../components/Issues/IssuesForm';
 import { IssuesTable } from '../components/Issues/IssuesTable';
 import { IssueView } from '../components/Issues/IssueView';
 import { Issue } from '../entities/Issue';
-import { GetIssues } from '../handlers/issues';
 import "../style/Issues.css";
 import "../style/Global-style.css";
 
-export const Issues: React.FC = () => {
-    const issarr: Issue[] = [];
-    const iss: Issue | undefined = undefined;
-    const [issues, setIssues] = useState(issarr);
-    const [issue, setIssue] = useState(iss);
+interface IssuesProps {
+    issues: Issue[];
+    updateIssues: () => void;
+}
 
-    function updateIssues() {
-        GetIssues().then(data => setIssues(data));
-    }
+export const Issues: React.FC<IssuesProps> = ({issues, updateIssues}) => {
+    const iss: Issue | undefined = undefined;
+    const [issue, setIssue] = useState(iss);
 
     useEffect(() => {
       updateIssues();
-    }, []);
+    }, [updateIssues]);
 
     return (
         <div className={"container"}>

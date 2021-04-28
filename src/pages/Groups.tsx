@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Group } from '../entities/Group';
 import { GroupsTable } from '../components/Groups/GroupsTable';
-import { GetGroups } from '../handlers/groups';
 import { GroupsForm } from '../components/Groups/GroupsForm';
 
-export const Groups: React.FC = () => {
-    const grparr: Group[] = [];
-    const [groups, setGroups] = useState(grparr);
+interface GroupsProps {
+    groups: Group[];
+    updateGroups: () => void;
+}
 
-    function updateGroups() {
-        GetGroups().then(data => setGroups(data));
-    }
-
+export const Groups: React.FC<GroupsProps> = ({groups, updateGroups}) => {
     useEffect(() => {
       updateGroups();
-    }, []);
+    }, [updateGroups]);
 
     return (
         <div>
