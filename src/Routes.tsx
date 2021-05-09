@@ -28,6 +28,9 @@ export const Routes: React.FC = () => {
         GetIssues().then(data => setIssues(data));
     }
 
+    // updateGroups();
+    // updateIssues();
+
     return (
         <BrowserRouter>
             <div>
@@ -38,7 +41,7 @@ export const Routes: React.FC = () => {
                     <Route exact path="/groups" component={() => <Groups groups={groups} updateGroups={updateGroups} />} />
                     <Route exact path="/issues" component={() => <Issues issues={issues} updateIssues={updateIssues} />} />
                     <Route exact path="/login" component={() => <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-                    <Route exact path="/logout" component={Logout} />
+                    <Route exact path="/logout" component={() => <Logout loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
                     <Route exact path="/register" component={Registration} />
                     <Route exact path="/refresh" component={RefreshToken} />
                 </Switch>

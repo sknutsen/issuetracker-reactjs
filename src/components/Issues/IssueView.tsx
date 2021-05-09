@@ -12,7 +12,7 @@ export const IssueView: React.FC<IssueViewProps> = ({issue, selectIssue}) => {
             <button className={"backButton"} onClick={() => selectIssue(undefined)}>Back</button>
             <br />
             <h2>{issue.Title}</h2>
-            <h4>{issue.Group} - {issue.User} - {issue.Severity}</h4>
+            <h4>{issue.Group?.Name ?? ""} - {issue.User?.Name ?? ""} - {issue.Severity}</h4>
             <p>{issue.Description}</p>
         </div>
     );

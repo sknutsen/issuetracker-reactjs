@@ -25,7 +25,7 @@ export const IssuesTable: React.FC<IssuesTableProps> = ({issues, selectIssue}) =
                         <td>{i.Id}</td>
                         <td>{i.Title}</td>
                         <td>{i.Severity}</td>
-                        <td>{i.User}</td>
+                        <td>{i.User?.Name ?? ""}</td>
                     </tr>
                 )}
             </tbody>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IssuesForm } from '../components/Issues/IssuesForm';
 import { IssuesTable } from '../components/Issues/IssuesTable';
 import { IssueView } from '../components/Issues/IssueView';
@@ -15,9 +15,13 @@ export const Issues: React.FC<IssuesProps> = ({issues, updateIssues}) => {
     const iss: Issue | undefined = undefined;
     const [issue, setIssue] = useState(iss);
 
-    useEffect(() => {
-      updateIssues();
-    }, [updateIssues]);
+    if (issues.length === 0) {
+        return (
+            <button onClick={updateIssues}>
+                Refresh list
+            </button>
+        );
+    }
 
     return (
         <div className={"container"}>
